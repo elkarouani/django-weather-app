@@ -22,7 +22,7 @@ def index(request):
 
 		city_weather = {
 			'city' : city.name,
-			'temperature' : r['main']['temp'],
+			'temperature' : fahrenheit_to_celsius(r['main']['temp']),
 			'description' : r['weather'][0]['description'],
 			'icon' : r['weather'][0]['icon'],
 		}
@@ -31,3 +31,6 @@ def index(request):
 
 	context = {'weather_data' : weather_data, 'form' : form}
 	return render(request, "weather/weather.html", context)
+
+def fahrenheit_to_celsius(fahrenheit):
+	return int((fahrenheit - 32) * 5.0/9.0)
